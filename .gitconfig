@@ -1,0 +1,27 @@
+[user]
+    email =
+    name =
+
+[core]
+    editor = vim
+
+[apply]
+    whitespace = fix
+
+[alias]
+    a = add
+    aa = add -A
+    ap = add -p
+    b = branch
+    c = commit
+    ch = checkout
+    d = diff
+    dc = diff --cached
+    f = fetch
+    l = log --graph --pretty=format:'%C(red)%h %C(bold blue)%an%Creset %C(green)%cr%C(yellow)%d%Creset %s'
+    ll = log
+    p = push
+    s = status
+
+[push]
+    default = simple
