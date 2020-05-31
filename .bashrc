@@ -16,6 +16,10 @@ alias ls='ls -hF --color=auto'
 alias psg='ps o user,pid,cmd | head -1; ps xo user,pid,cmd | grep -v grep | grep'
 alias xclip='xclip -selection clipboard'
 
+if [ -d "$HOME/bin" ]; then
+    PATH="$PATH:$HOME/bin"
+fi
+
 # Start ssh-agent
 if type "ssh-agent" &>/dev/null; then # Ensure ssh-agent exists
     if ! pgrep -u "$USER" ssh-agent >/dev/null 2>/dev/null; then
