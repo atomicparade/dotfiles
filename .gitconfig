@@ -21,7 +21,7 @@
     l = log --graph --pretty=format:'%C(red)%h %C(bold blue)%an%Creset %C(green)%cr%C(yellow)%d%Creset %s'
     ll = log
     p = push
-    s = status
+    s = status -u
 
 [push]
     default = simple
