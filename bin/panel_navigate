@@ -40,18 +40,18 @@ current_window_group_name = None
 current_window_group_id = None
 
 # Determine what window groups exist
-window_ids = get_value('xprop -root _NET_CLIENT_LIST').split('#')[1].strip().split(' ')
+window_ids = get_value('xprop -root _NET_CLIENT_LIST').split('#')[1].strip().split()
 window_ids = map(lambda window_id: window_id.replace(',', ''), window_ids)
 
 window_groups = []
 
 for window_id in window_ids:
-    window_workspace_id = get_value('xprop -id {} _NET_WM_DESKTOP'.format(window_id)).split(' ', 3)[2]
+    window_workspace_id = get_value('xprop -id {} _NET_WM_DESKTOP'.format(window_id)).split()[2]
 
     if window_workspace_id != current_workspace_id:
         continue
 
-    window_class = get_value('xprop -id {} WM_CLASS'.format(window_id)).split(' ', 3)[3][1:-1]
+    window_class = get_value('xprop -id {} WM_CLASS'.format(window_id)).split(maxsplit=3)[3][1:-1]
     window_group = next((wg for wg in window_groups if wg['name'] == window_class), None)
 
     if window_id == current_window_id:
