@@ -143,3 +143,6 @@ _get_git_committed() {
 }
 
 _set_ps1
+
+# Disable beeps
+xset b off
