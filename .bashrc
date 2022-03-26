@@ -1,9 +1,9 @@
-#
-# ~/.bashrc
-#
+# .bashrc
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+if [ -f "/etc/bashrc" ];
+then
+    . /etc/bashrc
+fi
 
 # Bash options
 HISTCONTROL=ignoredups  # Ignore duplicate entries
@@ -13,7 +13,6 @@ shopt -s checkwinsize   # Tell Bash to check the window size after each command
 
 # Aliases
 alias ls='ls -hF --color=auto'
-alias psg='ps o user,pid,cmd | head -1; ps xo user,pid,cmd | grep -v grep | grep'
 alias xclip='xclip -selection clipboard'
 
 if [ -d "$HOME/bin" ]; then
@@ -143,6 +142,3 @@ _get_git_committed() {
 }
 
 _set_ps1
-
-# Disable beeps
-xset b off
