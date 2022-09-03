@@ -1,10 +1,3 @@
-# .bashrc
-
-if [ -f "/etc/bashrc" ];
-then
-    . /etc/bashrc
-fi
-
 # Bash options
 HISTCONTROL=ignoredups  # Ignore duplicate entries
 HISTSIZE=1000           # 1000 lines
@@ -13,10 +6,18 @@ shopt -s checkwinsize   # Tell Bash to check the window size after each command
 
 # Aliases
 alias ls='ls -hF --color=auto'
-alias xclip='xclip -selection clipboard'
 
-if [ -d "$HOME/bin" ]; then
-    PATH="$PATH:$HOME/bin"
+if uname -a | grep MINGW >/dev/null 2>&1; then
+    # Allow Python to run in Git Bash
+    alias python='winpty python'
+fi
+
+if command -v bc &>/dev/null; then
+    alias bc='bc -l'
+fi
+
+if command -v xclip &>/dev/null; then
+    alias xclip='xclip -selection clipboard'
 fi
 
 # Start ssh-agent
