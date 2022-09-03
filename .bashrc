@@ -52,10 +52,10 @@ _set_ps1() {
         local c3='\[\033[38;5;034m\]' # Green3
         local c4='\[\033[38;5;247m\]' # Grey62
     else
-        local c1='\[\033[33m\]' # yellow/brown
-        local c2='\[\033[31m\]' # red
-        local c3='\[\033[32m\]' # green
-        local c4='\[\033[37m\]' # grey
+        local c1='\[\033[36m\]' # Cyan
+        local c2='\[\033[31m\]' # Red
+        local c3='\[\033[32m\]' # Green
+        local c4='\[\033[37m\]' # Grey
     fi
 
     local c0='\[\033[0m\]' # Default colour
@@ -69,8 +69,8 @@ $c2\$(_get_git_untracked)\
 $c4\$(_get_git_no_uncommitted)\
 $c2\$(_get_git_uncommitted)\
 $c4\$(_get_git_no_committed)\
-$c3\$(_get_git_committed)$c0\
-\\$ "
+$c3\$(_get_git_committed)\
+$c0\\$ "
 }
 
 _get_git_branch() {
