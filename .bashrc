@@ -43,22 +43,14 @@ if command -v "ssh-agent" &>/dev/null; then
     fi
 fi
 
-# PS1=
-# username@host cwd (with abbreviated $HOME)
-#     git: branch name in blue
-#     git: unfilled red circle, if there are untracked files
-#     git: red circle, if there are uncommited changes
-#     git: green circle, if there are committed changes
-# dollar sign
-
-# Colours: https://unix.stackexchange.com/a/124409
+# https://www.ditig.com/256-colors-cheat-sheet
 
 _set_ps1() {
     if [[ "$TERM" =~ 256color ]]; then
-        local c1='\[\033[38;5;039m\]' # blue
-        local c2='\[\033[38;5;160m\]' # red
-        local c3='\[\033[38;5;034m\]' # green
-        local c4='\[\033[38;5;247m\]' # grey
+        local c1='\[\033[38;5;044m\]' # DarkTurquoise
+        local c2='\[\033[38;5;160m\]' # Red3
+        local c3='\[\033[38;5;034m\]' # Green3
+        local c4='\[\033[38;5;247m\]' # Grey62
     else
         local c1='\[\033[33m\]' # yellow/brown
         local c2='\[\033[31m\]' # red
@@ -66,10 +58,11 @@ _set_ps1() {
         local c4='\[\033[37m\]' # grey
     fi
 
-    local c0='\[\033[0m\]'
+    local c0='\[\033[0m\]' # Default colour
 
     export PS1="\
-\\u@\\h \\w\
+$c1\u@\h \
+$c0\w \
 $c1\$(_get_git_branch)\
 $c4\$(_get_git_no_untracked)\
 $c2\$(_get_git_untracked)\
@@ -83,7 +76,7 @@ $c3\$(_get_git_committed)$c0\
 _get_git_branch() {
     # Print branch name, if any
     local branch=`git branch 2>/dev/null | grep '^*' | cut -d' ' -f2-`
-    [[ -n "$branch" ]] && echo -n " $branch"
+    [[ -n "$branch" ]] && echo -n "$branch"
 }
 
 _get_git_no_untracked() {
@@ -94,6 +87,7 @@ _get_git_no_untracked() {
     if git b &>/dev/null; then
         # Print the character if there AREN'T any untracked files
         if ! git status 2>/dev/null | grep -q 'Untracked files' 2>/dev/null; then
+            # Space in front to separate it from the branch name
             echo -e " $character"
         fi
     fi
@@ -105,6 +99,7 @@ _get_git_untracked() {
 
     # Print the character if there ARE untracked files
     if git status 2>/dev/null | grep -q 'Untracked files' 2>/dev/null; then
+        # Space in front to separate it from the branch name
         echo -e " $character"
     fi
 }
