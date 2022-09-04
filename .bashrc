@@ -10,6 +10,9 @@ alias ls='ls -hF --color=auto'
 if uname -a | grep MINGW >/dev/null 2>&1; then
     # Allow Python to run in Git Bash
     alias python='winpty python'
+    alias venv_activate='source .venv/Scripts/activate'
+else
+    alias venv_activate='source .venv/bin/activate'
 fi
 
 if command -v bc &>/dev/null; then
@@ -25,21 +28,13 @@ if command -v "ssh-agent" &>/dev/null; then
     # Is ssh-agent running? Count ps aux lines that contain ssh-agent
     # (This code should work on both Windows and *nix)
     if [ `ps aux | grep ssh-agent | grep -v grep | wc -l` = "0" ]; then
-        echo "running ssh-agent"
         # ssh-agent is not running; run it
-        if ssh-agent >"$HOME/.ssh_agent_info" 2>/dev/null; then
-            # Set $SSH_AGENT_PID and $SSH_AUTH_SOCK
-            source "$HOME/.ssh_agent_info" >/dev/null 2>&1
-        fi
-    else
-        # ssh-agent is already running...
-        if [ "$SSH_AGENT_PID" == "" ] && [ -f .ssh_agent_info ]; then
-            # ...and there is a file that contains the process information...
-            # ...and $SSH_AGENT_PID is not set
+        ssh-agent >.ssh_agent_info 2>/dev/null
+    fi
 
-            # Set $SSH_AGENT_PID and $SSH_AUTH_SOCK
-            source .ssh_agent_info >/dev/null 2>&1
-        fi
+    if [ "$SSH_AGENT_PID" == "" ] && [ -f .ssh_agent_info ]; then
+        # Set $SSH_AGENT_PID and $SSH_AUTH_SOCK
+        source .ssh_agent_info >/dev/null 2>&1
     fi
 fi
 
