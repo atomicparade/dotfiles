@@ -14,7 +14,7 @@ alias ls='ls -hF --color=auto'
 # Coloured man pages
 command -v most &>/dev/null && export PAGER=most
 
-if uname -a | grep MINGW >/dev/null 2>&1; then
+if uname -a | grep MINGW &>/dev/null; then
     # Allow Python to run in Git Bash
     alias python='winpty python'
     alias venv_activate='source .venv/Scripts/activate'
@@ -36,12 +36,12 @@ if command -v "ssh-agent" &>/dev/null; then
     # (This code should work on both Windows and *nix)
     if [ `ps aux | grep ssh-agent | grep -v grep | wc -l` = "0" ]; then
         # ssh-agent is not running; run it
-        ssh-agent >.ssh_agent_info 2>/dev/null
+        ssh-agent &>.ssh_agent_info
     fi
 
     if [ "$SSH_AGENT_PID" == "" ] && [ -f .ssh_agent_info ]; then
         # Set $SSH_AGENT_PID and $SSH_AUTH_SOCK
-        source .ssh_agent_info >/dev/null 2>&1
+        source .ssh_agent_info &>/dev/null
     fi
 fi
 
@@ -88,7 +88,7 @@ _get_git_no_untracked() {
     # Ensure we are in a git repo
     if git b &>/dev/null; then
         # Print the character if there AREN'T any untracked files
-        if ! git status 2>/dev/null | grep -q 'Untracked files' 2>/dev/null; then
+        if ! git status 2>/dev/null | grep -q 'Untracked files' &>/dev/null; then
             # Space in front to separate it from the branch name
             echo -e " $character"
         fi
@@ -100,7 +100,7 @@ _get_git_untracked() {
     local character="\xE2\x97\x8B"
 
     # Print the character if there ARE untracked files
-    if git status 2>/dev/null | grep -q 'Untracked files' 2>/dev/null; then
+    if git status 2>/dev/null | grep -q 'Untracked files' &>/dev/null; then
         # Space in front to separate it from the branch name
         echo -e " $character"
     fi
@@ -124,7 +124,7 @@ _get_git_uncommitted() {
     local character="\xE2\x97\x8F"
 
     # Print the character if there ARE unstaged changes
-    if git status 2>/dev/null | grep -q 'Changes not staged for commit' 2>/dev/null; then
+    if git status 2>/dev/null | grep -q 'Changes not staged for commit' &>/dev/null; then
         echo -e "$character"
     fi
 }
@@ -147,7 +147,7 @@ _get_git_committed() {
     local character="\xE2\x97\x8F"
 
     # Print the character if there ARE changes that have been added for commit
-    if git status 2>/dev/null | grep -q 'Changes to be committed' 2>/dev/null; then
+    if git status 2>/dev/null | grep -q 'Changes to be committed' &>/dev/null; then
         echo -e "$character"
     fi
 }
