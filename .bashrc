@@ -11,6 +11,9 @@ shopt -s checkwinsize   # Tell Bash to check the window size after each command
 # Aliases
 alias ls='ls -hF --color=auto'
 
+# Coloured man pages
+command -v most &>/dev/null && export PAGER=most
+
 if uname -a | grep MINGW >/dev/null 2>&1; then
     # Allow Python to run in Git Bash
     alias python='winpty python'
