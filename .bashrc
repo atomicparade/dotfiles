@@ -1,3 +1,7 @@
+# Only run in interactive shells
+# Prevents scp from failing
+[[ $- != *i* ]] && return
+
 # Bash options
 HISTCONTROL=ignoredups  # Ignore duplicate entries
 HISTSIZE=1000           # 1000 lines
