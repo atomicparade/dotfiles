@@ -30,6 +30,13 @@ if command -v xclip &>/dev/null; then
     alias xclip='xclip -selection clipboard'
 fi
 
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    source "$NVM_DIR/nvm.sh"  # This loads nvm
+
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
 # Start ssh-agent
 if command -v "ssh-agent" &>/dev/null; then
     # Is ssh-agent running? Count ps aux lines that contain ssh-agent
