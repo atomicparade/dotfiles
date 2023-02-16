@@ -160,3 +160,19 @@ _get_git_committed() {
 }
 
 _set_ps1
+
+TMUX_SESSION_NAME=""
+
+# Only launch tmux if it is found and a session name has been specified
+if command -v tmux &>/dev/null && [[ -n "$TMUX_SESSION_NAME" ]]; then
+    # Create tmux session if it doesn't exist
+    if ! tmux has-session &>/dev/null; then
+        tmux new-session -d -s "$TMUX_SESSION_NAME"
+    fi
+
+    # Attach only if not already attached
+    if [[ -z "$TMUX" ]]; then
+        # Switch to tmux - log out upon detaching from tmux
+        exec tmux attach -t "$TMUX_SESSION_NAME"
+    fi
+fi
