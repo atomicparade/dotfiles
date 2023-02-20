@@ -7,6 +7,7 @@ inoremap <S-Tab> <C-d>
 
 set hlsearch
 set incsearch
+set number
 
 set backspace=indent,eol,start
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.png,.jpg
