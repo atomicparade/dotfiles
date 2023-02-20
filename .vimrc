@@ -14,6 +14,9 @@ set wildignore=*.swp,*.bak
 
 syntax on
 
+autocmd BufRead,BufNewFile */nginx/sites-available/* set ft=nginx
+autocmd BufRead,BufNewFile */apparmor.d/* set ft=apparmor
+
 " Map C-l to redraw the screen and unhighlight search matches
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
