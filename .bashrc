@@ -31,6 +31,8 @@ if command -v xclip &>/dev/null; then
     alias xclip='xclip -selection clipboard'
 fi
 
+NVM_DIR=".nvm"
+
 if [ -s "$NVM_DIR/nvm.sh" ]; then
     export NVM_DIR="$HOME/.nvm"
     source "$NVM_DIR/nvm.sh"  # This loads nvm
