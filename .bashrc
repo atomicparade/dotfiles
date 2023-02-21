@@ -10,6 +10,7 @@ shopt -s checkwinsize   # Tell Bash to check the window size after each command
 
 # Aliases
 alias ls='ls -hF --color=auto'
+alias rsync='rsync -avhz'
 
 # Coloured man pages
 command -v most &>/dev/null && export PAGER=most
