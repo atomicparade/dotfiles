@@ -1,0 +1,10 @@
+{
+    "window.zoomLevel": 1,
+    "workbench.startupEditor": "none",
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "files.trimTrailingWhitespace": true,
+    "git.ignoreMissingGitWarning": true,
+    "editor.formatOnSave": true
+}
